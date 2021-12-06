@@ -26,20 +26,12 @@ def main(args):
 
     device = None if args.gpu is None else Device(args.gpu)
 
-    # logging for debugging
-    print("=========================")
-    print("Q FUNQ :  ", args.q_func)
-    print("USE GPU : ", device)
-    print("DATASET : ", args.dataset)
-    print("EPOCHS (CQL) : ", args.epochs_cql)
-    print("EPOCHS (FQE) : ", args.epochs_fqe)
-    print("=========================")
 
     cql = CQL(q_func_factory=args.q_func, use_gpu=device)
 
     cql.fit(train_episodes,
             eval_episodes=test_episodes,
-            n_epochs=args.epochs_cql,
+            n_epochs=5,
             scorers={
                 # Returns scorer function of evaluation on environment (mean_episode_return)
                 # Average reward vs training steps
@@ -54,7 +46,7 @@ def main(args):
     # Train OPE/FQE
     # evaluate the trained policy
     fqe = FQE(algo=cql,
-              n_epochs=args.epochs_fqe,
+              n_epochs=5,
               q_func_factory='qr',
               learning_rate=1e-4,
               use_gpu=True,
