@@ -2,9 +2,9 @@
 
 ***AIPI 530 Take Home Challenge - Bodong Xu***
 
-**Blog: Reinforcement Learning 101** 
+**Blog: [Reinforcement Learning 101](https://medium.com/@burtonxu/reinforcement-learning-101-5836839ef9a6)** 
 
-[The blog](https://medium.com/@burtonxu/reinforcement-learning-101-5836839ef9a6) post covers discussions about following questions:
+The blog post covers discussions about following questions:
 
 1. What is reinforcement learning 
 2. What are the pros and cons of reinforcement learning 
