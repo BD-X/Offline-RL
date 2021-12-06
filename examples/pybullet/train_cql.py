@@ -12,6 +12,10 @@ from d3rlpy.metrics.scorer import value_estimation_std_scorer
 from d3rlpy.gpu import Device
 from sklearn.model_selection import train_test_split
 
+from d3rlpy.metrics.scorer import initial_state_value_estimation_scorer
+from d3rlpy.metrics.scorer import true_q_value_scorer
+from d3rlpy.metrics.scorer import soft_opc_scorer
+from d3rlpy.ope import FQE
 
 def main(args):
     dataset, env = get_pybullet(args.dataset)
@@ -26,16 +30,33 @@ def main(args):
 
     cql.fit(train_episodes,
             eval_episodes=test_episodes,
-            n_epochs=100,
+            n_epochs=args.epochs_cql,
             scorers={
-                'environment': evaluate_on_environment(env),
-                'td_error': td_error_scorer,
-                'discounted_advantage': discounted_sum_of_advantage_scorer,
-                'value_scale': average_value_estimation_scorer,
-                'value_std': value_estimation_std_scorer,
-                'action_diff': continuous_action_diff_scorer
-            })
-
+                # Returns scorer function of evaluation on environment (mean_episode_return)
+                # Average reward vs training steps
+                "environment": evaluate_on_environment(env),
+                # Returns true q values
+                # True Q vs training steps
+                "true_q_value": true_q_value_scorer,
+                # Returns mean estimated action-values at the initial states
+                # Estimated Q vs training steps
+                "estimated_q": initial_state_value_estimation_scorer})
+    
+    # Train OPE/FQE
+    # evaluate the trained policy
+    fqe = FQE(algo=cql,
+              n_epochs=args.epochs_fqe,
+              q_func_factory='qr',
+              learning_rate=1e-4,
+              use_gpu=True,
+              encoder_params={'hidden_units': [1024, 1024, 1024, 1024]})
+    fqe.fit(dataset.episodes,
+            n_epochs = args.epochs_fqe,
+            eval_episodes=dataset.episodes,
+            scorers={
+                'init_value': initial_state_value_estimation_scorer, # Estimated q vs training steps
+                'soft_opc': soft_opc_scorer(600) # soft off-policy classification
+                })
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
