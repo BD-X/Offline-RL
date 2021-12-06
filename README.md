@@ -61,8 +61,10 @@ The objectives of this project is
 
 3. Sample results. (6 epochs)
 * Train CQL
-<p align="center"><img align="center" src="train_cql.png"></p>
+<p align="center"><img align="center" width = "1500px" src="train_cql.png"></p>
+
 * Train FQE
+<p align="center"><img align="center" width = "400px" src="train_fqe.png"></p>
 
 # More about d3rlpy
 
