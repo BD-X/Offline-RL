@@ -13,7 +13,7 @@ from d3rlpy.gpu import Device
 from sklearn.model_selection import train_test_split
 
 from d3rlpy.metrics.scorer import initial_state_value_estimation_scorer
-from d3rlpy.metrics.scorer import true_q_value_scorer
+from d3rlpy.metrics.scorer import true_q_value
 from d3rlpy.metrics.scorer import soft_opc_scorer
 from d3rlpy.ope import FQE
 
@@ -38,7 +38,7 @@ def main(args):
                 "environment": evaluate_on_environment(env),
                 # Returns true q values
                 # True Q vs training steps
-                "true_q_value": true_q_value_scorer,
+                "true_q_value": true_q_value,
                 # Returns mean estimated action-values at the initial states
                 # Estimated Q vs training steps
                 "estimated_q": initial_state_value_estimation_scorer},
