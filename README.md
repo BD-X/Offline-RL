@@ -4,6 +4,8 @@
 
 **Blog: [Reinforcement Learning 101](https://medium.com/@burtonxu/reinforcement-learning-101-5836839ef9a6)** 
 
+(... still in progress, coming soon ...)
+
 The blog post covers discussions about following questions:
 
 1. What is reinforcement learning 
