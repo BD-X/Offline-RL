@@ -26,6 +26,15 @@ def main(args):
 
     device = None if args.gpu is None else Device(args.gpu)
 
+    # logging for debugging
+    print("=========================")
+    print("Q FUNQ :  ", args.q_func)
+    print("USE GPU : ", device)
+    print("DATASET : ", args.dataset)
+    print("EPOCHS (CQL) : ", args.epochs_cql)
+    print("EPOCHS (FQE) : ", args.epochs_fqe)
+    print("=========================")
+
     cql = CQL(q_func_factory=args.q_func, use_gpu=device)
 
     cql.fit(train_episodes,
