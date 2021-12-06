@@ -2,7 +2,7 @@
 
 ***AIPI 530 Take Home Challenge - Bodong Xu***
 
-## Blog: Reinforcement Learning 101
+**Blog: Reinforcement Learning 101**
 
 [The blog](https://medium.com/@burtonxu/reinforcement-learning-101-5836839ef9a6) post covers discussions about following questions:
 
@@ -33,11 +33,11 @@ The objectives of this project is
 * Train OPE (FQE) to evaluate the Estimated Q
 
 # Installation
-1. Git clone the repository. 
+**1. Git clone the repository.**
 ```
 !git clone https://github.com/BD-X/Offline-RL
 ```
-2. Install the related packages. Including the pybullet dataset and other requirements.
+**2. Install the related packages.** Including the pybullet dataset and other requirements.
 ```
 !pip install git+https://github.com/takuseno/d4rl-pybullet
 !pip install Cython numpy # if not installed
@@ -46,12 +46,12 @@ The objectives of this project is
 
 # How to Get Start - Training & Examples
 
-1. Execute **`train_cql_bx.py`** file, which can be found at the root. We can customize the epochs we want to run by setting the para `epochs_cql` and `epochs_fqe`. 
+**1. Execute **`train_cql_bx.py`** file**, which can be found at the root. We can customize the epochs we want to run by setting the para `epochs_cql` and `epochs_fqe`. 
 ```
 !python train_cql_bx.py --epochs_cql 6 --epochs_fqe 6
 ```
 
-2. How to find log results. 
+**2. How to find log results.**
 * The log files paths have been set consistent, in `d3rlpy_log/CQL_results` and `d3rlpy_log/FQE_results`.
 * Important log files:
    * Average reward vs training steps `./CQL_results/environment.csv`
@@ -59,12 +59,18 @@ The objectives of this project is
    * Estimated Q vs training steps `./CQL_results/estimated_q.csv`
    * FQE estimated Q `./FQE_results/init_value.csv`
 
-3. Sample results. (6 epochs)
+**3. Sample results. (6 epochs)**
 * Train CQL
 <p align="center"><img align="center" width = "1500px" src="train_cql.png"></p>
 
 * Train FQE
 <p align="center"><img align="center" width = "400px" src="train_fqe.png"></p>
+
+**4. *Example Notebook***
+
+* The sample implementation of the repository
+
+  [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1LpVPkUccR3gscV_bFZTkcHkmbsz0ixCf?usp=sharing)
 
 # More about d3rlpy
 
@@ -190,33 +196,6 @@ cql.fit(dataset,
 
 See more datasets at [d4rl](https://github.com/rail-berkeley/d4rl).
 
-### Atari 2600
-<p align="center"><img align="center" width="160px" src="assets/breakout.gif"></p>
-
-```py
-import d3rlpy
-from sklearn.model_selection import train_test_split
-
-# prepare dataset
-dataset, env = d3rlpy.datasets.get_atari('breakout-expert-v0')
-
-# split dataset
-train_episodes, test_episodes = train_test_split(dataset, test_size=0.1)
-
-# prepare algorithm
-cql = d3rlpy.algos.DiscreteCQL(n_frames=4, q_func_factory='qr', scaler='pixel', use_gpu=True)
-
-# start training
-cql.fit(train_episodes,
-        eval_episodes=test_episodes,
-        n_epochs=100,
-        scorers={
-            'environment': d3rlpy.metrics.evaluate_on_environment(env),
-            'td_error': d3rlpy.metrics.td_error_scorer
-        })
-```
-
-See more Atari datasets at [d4rl-atari](https://github.com/takuseno/d4rl-atari).
 
 ### PyBullet
 <p align="center"><img align="center" width="160px" src="assets/hopper.gif"></p>
