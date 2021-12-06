@@ -1,16 +1,71 @@
-<p align="center"><img align="center" width="300px" src="assets/logo.png"></p>
+# Offline Reinforcement Learning Pipeline
 
-# d3rlpy: An offline deep reinforcement learning library
+***AIPI 530 Take Home Challenge - Bodong Xu***
 
-![test](https://github.com/takuseno/d3rlpy/workflows/test/badge.svg)
-![build](https://github.com/takuseno/d3rlpy/workflows/build/badge.svg)
-[![Documentation Status](https://readthedocs.org/projects/d3rlpy/badge/?version=latest)](https://d3rlpy.readthedocs.io/en/latest/?badge=latest)
-[![codecov](https://codecov.io/gh/takuseno/d3rlpy/branch/master/graph/badge.svg?token=AQ02USKN6Y)](https://codecov.io/gh/takuseno/d3rlpy)
-[![Maintainability](https://api.codeclimate.com/v1/badges/c9162eb736d0b0f612d8/maintainability)](https://codeclimate.com/github/takuseno/d3rlpy/maintainability)
-[![Gitter](https://img.shields.io/gitter/room/d3rlpy/d3rlpy)](https://gitter.im/d3rlpy/d3rlpy)
-![MIT](https://img.shields.io/badge/license-MIT-blue)
+## Blog: Reinforcement Learning 101
 
-d3rlpy is an offline deep reinforcement learning library for practitioners and researchers.
+[The blog](https://medium.com/@burtonxu/reinforcement-learning-101-5836839ef9a6) post covers discussions about following questions:
+
+1. What is reinforcement learning 
+2. What are the pros and cons of reinforcement learning 
+
+3. When should we consider applying reinforcement learning (and when should not) 
+
+4. What's the difference between supervised learning and reinforcement learning 
+
+5. What is offline reinforcement learning 
+
+6. What are the pros and cons of offline reinforcement learning 
+
+7. When should we consider applying offline reinforcement learning (and when should not) 
+
+8. Have an example of offline reinforcement learning in the real-world 
+
+# Introduction
+The repository is created for AIPI 530 Take Home Project.
+
+The objectives of this project is 
+* Train CQL 
+   * Pick [PyBullet](https://pybullet.org/wordpress/) environment/dataset in [d3rlpy](https://github.com/takuseno/d3rlpy) and assess the following results
+   * Average reward vs training steps 
+   * True Q vs training steps
+   * Estimated Q vs training steps 
+* Train OPE (FQE) to evaluate the Estimated Q
+
+# Installation
+1. Git clone the repository. 
+```
+!git clone https://github.com/BD-X/Offline-RL
+```
+2. Install the related packages. Including the pybullet dataset and other requirements.
+```
+!pip install git+https://github.com/takuseno/d4rl-pybullet
+!pip install Cython numpy # if not installed
+!pip install -e .
+```
+
+# How to Get Start - Training & Examples
+
+1. Execute **`train_cql_bx.py`** file, which can be found at the root. We can customize the epochs we want to run by setting the para `epochs_cql` and `epochs_fqe`. 
+```
+!python train_cql_bx.py --epochs_cql 6 --epochs_fqe 6
+```
+
+2. How to find log results. 
+* The log files paths have been set consistent, in `d3rlpy_log/CQL_results` and `d3rlpy_log/FQE_results`.
+* Important log files:
+   * Average reward vs training steps `./CQL_results/environment.csv`
+   * True Q vs training steps `./CQL_results/true_q_value.csv`
+   * Estimated Q vs training steps `./CQL_results/estimated_q.csv`
+   * FQE estimated Q `./FQE_results/init_value.csv`
+
+3. Sample results. (6 epochs)
+* Train CQL
+<p align="center"><img align="center" src="train_cql.png"></p>
+* Train FQE
+
+# More about d3rlpy
+
 
 ```py
 import d3rlpy
@@ -232,7 +287,7 @@ The release planning can be checked at [milestones](https://github.com/takuseno/
 ## roadmap
 The roadmap to the future release is available in [ROADMAP.md](ROADMAP.md).
 
-## citation
+# Citation
 The paper is available [here](https://arxiv.org/abs/2111.03788).
 ```
 @InProceedings{seno2021d3rlpy,
@@ -244,7 +299,3 @@ The paper is available [here](https://arxiv.org/abs/2111.03788).
 }
 ```
 
-## acknowledgement
-This work is supported by Information-technology Promotion Agency, Japan
-(IPA), Exploratory IT Human Resources Project (MITOU Program) in the fiscal
-year 2020.
