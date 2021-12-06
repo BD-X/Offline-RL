@@ -2,26 +2,6 @@
 
 ***AIPI 530 Take Home Challenge - Bodong Xu***
 
-**Blog: [Reinforcement Learning 101](https://medium.com/@burtonxu/reinforcement-learning-101-5836839ef9a6)** 
-
-(... still in progress, coming soon ...)
-
-The blog post covers discussions about following questions:
-
-1. What is reinforcement learning 
-2. What are the pros and cons of reinforcement learning 
-
-3. When should we consider applying reinforcement learning (and when should not) 
-
-4. What's the difference between supervised learning and reinforcement learning 
-
-5. What is offline reinforcement learning 
-
-6. What are the pros and cons of offline reinforcement learning 
-
-7. When should we consider applying offline reinforcement learning (and when should not) 
-
-8. Have an example of offline reinforcement learning in the real-world 
 
 # Introduction
 The repository is created for AIPI 530 Take Home Project.
