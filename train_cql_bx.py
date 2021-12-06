@@ -52,7 +52,7 @@ def main(args):
               use_gpu=True,
               encoder_params={'hidden_units': [1024, 1024, 1024, 1024]})
     fqe.fit(dataset.episodes,
-            n_epochs = args.epochs_fqe,
+            n_epochs = 5,
             eval_episodes=dataset.episodes,
             scorers={
                 'init_value': initial_state_value_estimation_scorer, # Estimated q vs training steps
