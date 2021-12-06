@@ -31,7 +31,7 @@ def main(args):
 
     cql.fit(train_episodes,
             eval_episodes=test_episodes,
-            n_epochs=5,
+            n_epochs= args.epochs_cql,
             scorers={
                 # Returns scorer function of evaluation on environment (mean_episode_return)
                 # Average reward vs training steps
@@ -41,29 +41,45 @@ def main(args):
                 "true_q_value": true_q_value_scorer,
                 # Returns mean estimated action-values at the initial states
                 # Estimated Q vs training steps
-                "estimated_q": initial_state_value_estimation_scorer})
+                "estimated_q": initial_state_value_estimation_scorer},
+            
+            # create unified folder names for log files
+            with_timestamp=False,
+            verbose=False,
+            experiment_name='CQL_results'
+            )
     
     # Train OPE/FQE
     # evaluate the trained policy
     fqe = FQE(algo=cql,
-              n_epochs=5,
+              n_epochs=args.epochs_fqe,
               q_func_factory='qr',
               learning_rate=1e-4,
               use_gpu=True,
               encoder_params={'hidden_units': [1024, 1024, 1024, 1024]})
     fqe.fit(dataset.episodes,
-            n_epochs = 5,
+            n_epochs = args.epochs_fqe,
             eval_episodes=dataset.episodes,
             scorers={
                 'init_value': initial_state_value_estimation_scorer, # Estimated q vs training steps
                 'soft_opc': soft_opc_scorer(600) # soft off-policy classification
-                })
+                },
+            # create unified folder names for log files
+            with_timestamp=False,
+            verbose=False,
+            experiment_name='FQE_results'    
+            )
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset',
                         type=str,
                         default='hopper-bullet-mixed-v0')
+    
+    # arg for customized cql and fqe
+    parser.add_argument('--epochs_cql', type=int, default=10)  # epochs for cql being passed in as arg
+    parser.add_argument('--epochs_fqe', type=int, default=10)  # epochs for fqe being passed in as arg
+
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--q-func',
                         type=str,
