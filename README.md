@@ -2,7 +2,7 @@
 
 ***AIPI 530 Take Home Challenge - Bodong Xu***
 
-**Blog: Reinforcement Learning 101**
+**Blog: Reinforcement Learning 101** 
 
 [The blog](https://medium.com/@burtonxu/reinforcement-learning-101-5836839ef9a6) post covers discussions about following questions:
 
@@ -121,13 +121,6 @@ d3rlpy supports Linux, macOS and Windows.
 ```
 $ pip install d3rlpy
 ```
-### Anaconda
-[![Anaconda-Server Badge](https://anaconda.org/conda-forge/d3rlpy/badges/version.svg)](https://anaconda.org/conda-forge/d3rlpy)
-[![Anaconda-Server Badge](https://anaconda.org/conda-forge/d3rlpy/badges/platforms.svg)](https://anaconda.org/conda-forge/d3rlpy)
-[![Anaconda-Server Badge](https://anaconda.org/conda-forge/d3rlpy/badges/downloads.svg)](https://anaconda.org/conda-forge/d3rlpy)
-```
-$ conda install -c conda-forge d3rlpy
-```
 
 ### Docker
 ![Docker Pulls](https://img.shields.io/docker/pulls/takuseno/d3rlpy)
@@ -166,36 +159,7 @@ $ docker run -it --gpus all --name d3rlpy takuseno/d3rlpy:latest bash
 - Q-functions
   - [Fully parametrized Quantile Function](https://arxiv.org/abs/1911.02140) (experimental)
 
-## benchmark results
-d3rlpy is benchmarked to ensure the implementation quality.
-The benchmark scripts are available [reproductions](https://github.com/takuseno/d3rlpy/tree/master/reproductions) directory.
-The benchmark results are available [d3rlpy-benchmarks](https://github.com/takuseno/d3rlpy-benchmarks) repository.
-
 ## examples
-### MuJoCo
-<p align="center"><img align="center" width="160px" src="assets/mujoco_hopper.gif"></p>
-
-```py
-import d3rlpy
-
-# prepare dataset
-dataset, env = d3rlpy.datasets.get_d4rl('hopper-medium-v0')
-
-# prepare algorithm
-cql = d3rlpy.algos.CQL(use_gpu=True)
-
-# train
-cql.fit(dataset,
-        eval_episodes=dataset,
-        n_epochs=100,
-        scorers={
-            'environment': d3rlpy.metrics.evaluate_on_environment(env),
-            'td_error': d3rlpy.metrics.td_error_scorer
-        })
-```
-
-See more datasets at [d4rl](https://github.com/rail-berkeley/d4rl).
-
 
 ### PyBullet
 <p align="center"><img align="center" width="160px" src="assets/hopper.gif"></p>
@@ -246,27 +210,6 @@ Try a cartpole example on Google Colaboratory!
 - offline RL tutorial: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/takuseno/d3rlpy/blob/master/tutorials/cartpole.ipynb)
 - online RL tutorial: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/takuseno/d3rlpy/blob/master/tutorials/online.ipynb)
 
-## contributions
-Any kind of contribution to d3rlpy would be highly appreciated!
-Please check the [contribution guide](CONTRIBUTING.md).
-
-The release planning can be checked at [milestones](https://github.com/takuseno/d3rlpy/milestones).
-
-## community
-| Channel | Link |
-|:-|:-|
-| Chat | [Gitter](https://gitter.im/d3rlpy/d3rlpy) |
-| Issues | [GitHub Issues](https://github.com/takuseno/d3rlpy/issues) |
-
-## family projects
-| Project | Description |
-|:-:|:-|
-| [d4rl-pybullet](https://github.com/takuseno/d4rl-pybullet) | An offline RL datasets of PyBullet tasks |
-| [d4rl-atari](https://github.com/takuseno/d4rl-atari) | A d4rl-style library of Google's Atari 2600 datasets |
-| [MINERVA](https://github.com/takuseno/minerva) | An out-of-the-box GUI tool for offline RL |
-
-## roadmap
-The roadmap to the future release is available in [ROADMAP.md](ROADMAP.md).
 
 # Citation
 The paper is available [here](https://arxiv.org/abs/2111.03788).
